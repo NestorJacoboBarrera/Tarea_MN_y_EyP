@@ -8,7 +8,7 @@ Nacionalidad <-  c("Boliviana", "Peruana", "Venezolana", "Cubana", "Mexicana",
   "Chilena", "Uruguaya", "Venezolana", "Uruguaya", "Argentina", "Venezolana",
   "Uruguaya", "Cubana", "Venezolana", "Cubana", "Chilena", "Argentina", "Peruana",
   "Boliviana", "Cubana", "Venezolana", "Colombiana", "Mexicana", "Uruguaya",
-  "Argentina" )
+  "Argentina")
 (Nacionalidad)
 sort(Nacionalidad)
 table(Nacionalidad)
@@ -18,3 +18,4 @@ barplot(contador, xlabel="Frecuencias",
         ylabel="Nacionalidad",
         main="Encuesta Nacionacionalidades", 
         col=rainbow(10))
+
