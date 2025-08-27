@@ -14,8 +14,9 @@ sort(Nacionalidad)
 table(Nacionalidad)
 contador <- table(Nacionalidad)
 barplot(contador)
-barplot(contador, xlabel="Frecuencias",
-        ylabel="Nacionalidad",
+barplot(contador, xlab="Frecuencias",
+        ylab="Nacionalidad",
         main="Encuesta Nacionacionalidades", 
         col=rainbow(10))
+
 
