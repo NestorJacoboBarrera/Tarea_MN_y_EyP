@@ -1,0 +1,74 @@
+---
+title: "Grado de dolor"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Grados_dolor <- factor(c("severo", "leve", "leve", "severo", "leve", "leve", "leve", "moderado", "moderado",
+ "moderado", "moderado", "severo", "severo", "moderado", "leve", "severo", "leve", "severo", "severo",
+ "severo", "leve", "moderado", "severo", "severo", "leve", "leve", "leve", "severo", "severo", "leve"),
+                levels=c("leve","moderado","severo"),
+                ordered=TRUE)
+```
+
+```{r}
+Grados_num <- as.numeric(Grados_dolor)
+```
+
+```{r}
+median(Grados_num)                      
+levels(Grados_dolor)[median(Grados_num)]
+```
+
+```{r}
+quantile(Grados_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(Grados_dolor)[quantile(Grados_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(Grados_dolor)
+
+freq_Grados <- table(Grados_dolor)
+porc_Grados <- round(prop.table(freq_Grados)*100, 1)
+```
+
+
+```{r}
+mi_min <- names(freq_Grados)[which.min(freq_Grados)] 
+(mi_min)
+mi_max <- names(freq_Grados)[which.max(freq_Grados)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq_Grados), 0.8)
+
+bp <- barplot(freq_Grados,
+              col = bar_colors,
+              main = "Grados de Dolor",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq_Grados)+2),
+              cex.names = 0.7)
+
+# Agregar valores encima de cada barra
+text(bp, freq_Grados, labels = freq_Grados, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq_Grados,
+    labels = paste(names(freq_Grados), porc_Grados, "%"),
+    col = rainbow(length(freq_Grados), 0.8),
+    main = "Grados de Dolor")
+```

@@ -1,0 +1,185 @@
+---
+title: "Accidentes_Vialidad"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Accidentes_vialidad <- c( 22, 24, 35, 8, 12, 33, 17, 31, 24, 12, 6, 14, 26, 8, 41,
+          3, 15, 7, 3, 23, 10, 17, 3, 7, 1, 11, 19, 4, 33, 7, 10, 2, 2, 19, 1, 15, 7, 16, 13, 3, 26,
+          4, 16, 18, 27, 18, 17, 32, 25, 22, 34, 40, 47, 35, 19, 27, 12, 44, 37, 27, 40, 18, 28,
+          16, 31, 37, 32, 44, 29, 35, 25, 28, 27, 31, 33, 21, 41, 20, 39, 28, 22, 34, 27, 28, 37,
+          26, 29, 37, 38, 26, 38, 53, 39, 41, 35, 57, 27, 41, 41, 72, 53, 64, 67, 46, 44, 31, 47,
+          56, 56, 63, 47, 58, 44, 32, 70, 53, 59, 51, 70, 44, 51, 52, 46, 44, 46, 41, 54, 63, 46,
+          47, 37, 60, 34, 49, 63, 42, 48, 44, 65, 63, 45, 63, 42, 58, 43, 54, 90, 55, 57, 54, 55,
+          46, 46, 46, 55, 23, 39, 35, 44, 58, 68, 44, 11, 23, 24, 13, 47, 49.)
+```
+
+```{r}
+summary(Accidentes_vialidad)
+```
+
+```{r}
+accidentes_ord <- sort(Accidentes_vialidad); (accidentes_ord)
+cte <- 9
+```
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+```{r}
+mis_deciles <- accidentes_ord[t]; (mis_deciles)
+cuantiles <- quantile(Accidentes_vialidad); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+```{r}
+x_media <- mean(Accidentes_vialidad);(x_media)
+mi_min <- min(Accidentes_vialidad); (mi_min)
+mi_max <- max(Accidentes_vialidad); (mi_max)
+varianza <- var(Accidentes_vialidad); (varianza) 
+DesvEst <- sd(Accidentes_vialidad); (DesvEst)
+```
+
+```{r}
+plot(
+  Accidentes_vialidad,
+  main = "Gráfica Accidentes",
+  xlab = "Índice de Accidentes",
+  ylab = "Numero (accidentes)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                 
+  legend = c(mi_min,mi_max),    
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                
+  cex = 0.7,
+  bty = "n"                    
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(Accidentes_vialidad), min(Accidentes_vialidad), col = "purple", pch = 17, cex = 1.5)
+points(which.max(Accidentes_vialidad), max(Accidentes_vialidad), col = "orange", pch = 17, cex = 1.5)
+```
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(Accidentes_vialidad, breaks = nbreaks, col= miscolores, 
+          main = 'Numero de Accidentes',
+          xlab="Accidentes",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+```{r}
+nbreaks=10;
+h2 <- hist(Accidentes_vialidad, breaks = nbreaks, col= miscolores, 
+           main = 'Numero de Accidentes',
+           xlab="Accidentes",
+           ylab="Frecuencias",
+           ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                
+  legend = h$counts,    
+  fill = miscolores,
+  col = miscolores,    
+  pt.cex = 1.5,               
+  cex = 0.5,
+  bty = "n"                    
+)
+```
+
+```{r}
+h3 <- hist(Accidentes_vialidad, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Accidentes de Vialidad',
+           xlab="Numero accidentes",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                   
+)
+```
+
+```{r}
+nbreaks <- 10
+intervalos <- cut(Accidentes_vialidad, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Accidentes ",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(Accidentes_vialidad, breaks = nbreaks, plot = FALSE)
+hist(Accidentes_vialidad,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Numero (Accidentes)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           
+```

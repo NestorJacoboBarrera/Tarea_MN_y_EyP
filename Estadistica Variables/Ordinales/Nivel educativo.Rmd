@@ -1,0 +1,87 @@
+---
+title: "Nivel educativo"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+nivel <- factor(c("posdoctorado","preparatoria","preparatoria","doctorado","primaria",
+                  "doctorado","preparatoria","secundaria","preparatoria","preparatoria",
+                  "primaria","doctorado","secundaria","secundaria","secundaria",
+                  "licenciatura","doctorado","primaria","maestria","posdoctorado",
+                  "maestria","preparatoria","posdoctorado","doctorado","preparatoria",
+                  "doctorado","maestria","primaria","licenciatura","secundaria",
+                  "maestria","posdoctorado","doctorado","licenciatura","doctorado",
+                  "posdoctorado","maestria","primaria","secundaria","preparatoria"),
+                levels=c("primaria","secundaria","preparatoria","licenciatura",
+                         "maestria","doctorado","posdoctorado"),
+                ordered=TRUE)
+
+
+    
+
+
+
+   
+```
+
+```{r}
+nivel_num <- as.numeric(nivel)
+```
+
+```{r}
+median(nivel_num)                      
+levels(nivel)[median(nivel_num)]
+```
+
+```{r}
+quantile(nivel_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(nivel)[quantile(nivel_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(nivel)
+
+freq_nivel <- table(nivel)
+porc_nivel <- round(prop.table(freq_nivel)*100, 1)
+```
+
+
+```{r}
+mi_min <- names(freq_nivel)[which.min(freq_nivel)] 
+(mi_min)
+mi_max <- names(freq_nivel)[which.max(freq_nivel)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq_nivel), 0.8)
+
+bp <- barplot(freq_nivel,
+              col = bar_colors,
+              main = "Nivel Educativo",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq_nivel)+2),
+              cex.names = 0.7)
+
+# Agregar valores encima de cada barra
+text(bp, freq_nivel, labels = freq_nivel, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq_nivel,
+    labels = paste(names(freq_nivel), porc_nivel, "%"),
+    col = rainbow(length(freq_nivel), 0.8),
+    main = "Nivel Educativo")
+```

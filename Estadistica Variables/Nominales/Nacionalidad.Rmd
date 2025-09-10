@@ -1,0 +1,75 @@
+---
+title: "Nacionalidad"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Nacionalidad <-  c("Boliviana", "Peruana", "Venezolana", "Cubana", "Mexicana",
+  "Colombiana", "Colombiana", "Brasileña", "Colombiana", "Venezolana", "Chilena",
+  "Argentina", "Mexicana", "Mexicana", "Argentina", "Mexicana", "Argentina",
+  "Brasileña", "Mexicana", "Uruguaya", "Argentina", "Argentina", "Colombiana",
+  "Cubana", "Boliviana", "Peruana", "Boliviana", "Boliviana", "Peruana", "Uruguaya",
+  "Chilena", "Uruguaya", "Venezolana", "Uruguaya", "Argentina", "Venezolana",
+  "Uruguaya", "Cubana", "Venezolana", "Cubana", "Chilena", "Argentina", "Peruana",
+  "Boliviana", "Cubana", "Venezolana", "Colombiana", "Mexicana", "Uruguaya",
+  "Argentina" )
+(Nacionalidad)
+               
+```
+
+```{r}
+summary(Nacionalidad)
+```
+
+```{r}
+Nacionalidad_ord <- sort(Nacionalidad); (Nacionalidad_ord)
+```
+
+```{r}
+table(Nacionalidad)                # Frecuencias
+prop.table(table(Nacionalidad))    # Proporciones
+```
+
+```{r}
+freq <- table(Nacionalidad)
+porc <- round(prop.table(freq)*100, 1)
+mi_min <- names(freq)[which.min(freq)] 
+(mi_min)
+mi_max <- names(freq)[which.max(freq)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq), 0.8)
+
+bp <- barplot(freq,
+              col = bar_colors,
+              main = "Nacionalidad",
+              xlab = "Pais",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq)+2),
+              cex.names = 0.5)
+
+# Agregar valores encima de cada barra
+text(bp, freq, labels = freq, pos = 3, cex = 0.8)
+
+
+```
+
+```{r}
+pie(freq,
+    labels = paste(names(freq), porc, "%"),
+    col = rainbow(length(freq), 0.8),
+    main = "Nacionalidad")
+```

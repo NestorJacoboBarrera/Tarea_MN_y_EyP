@@ -1,0 +1,79 @@
+---
+title: "Rangos"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Rangos <- factor(c("Principiante", "Principiante", "Aprendiz", "Intermedio", "Experto", "Intermedio", "Experto",
+"Aprendiz", "Principiante", "Avanzado", "Intermedio", "Experto", "Experto", "Experto",
+"Avanzado", "Intermedio", "Intermedio", "Principiante", "Principiante", "Principiante", "Principiante",
+"Principiante", "Intermedio", "Aprendiz", "Aprendiz", "Aprendiz", "Aprendiz", "Intermedio", 
+"Aprendiz", "Principiante", "Intermedio", "Avanzado", "Avanzado", "Intermedio", "Avanzado",
+"Principiante", "Intermedio", "Avanzado", "Intermedio", "Avanzado"),
+                levels=c("Aprendiz","Principiante","Intermedio","Avanzado",
+                         "Experto"),
+                ordered=TRUE)
+```
+
+```{r}
+Rangos_num <- as.numeric(Rangos)
+```
+
+```{r}
+median(Rangos_num)                      
+levels(Rangos)[median(Rangos_num)]
+```
+
+```{r}
+quantile(Rangos_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(Rangos)[quantile(Rangos_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(Rangos)
+
+freq_Rangos <- table(Rangos)
+porc_Rangos <- round(prop.table(freq_Rangos)*100, 1)
+```
+
+
+```{r}
+mi_min <- names(freq_Rangos)[which.min(freq_Rangos)] 
+(mi_min)
+mi_max <- names(freq_Rangos)[which.max(freq_Rangos)] 
+(mi_max)
+
+```
+
+```{r}
+bar_colors <- rainbow(length(freq_Rangos), 0.8)
+
+bp <- barplot(freq_Rangos,
+              col = bar_colors,
+              main = "Rangos",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq_Rangos)+2),
+              cex.names = 0.8)
+
+# Agregar valores encima de cada barra
+text(bp, freq_Rangos, labels = freq_Rangos, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq_Rangos,
+    labels = paste(names(freq_Rangos), porc_Rangos, "%"),
+    col = rainbow(length(freq_Rangos), 0.8),
+    main = " Rangos")
+```

@@ -1,0 +1,73 @@
+---
+title: "Estado civil"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Estado_Civil <- c("Viudo", "Viudo", "Union libre", "Soltero", "Viudo", "Union libre", "Divorciado",
+ "Casado", "Union libre", "Viudo", "Viudo", "Soltero", "Divorciado", "Divorciado", "Divorciado",
+ "Union libre", "Casado", "Union libre", "Casado", "Soltero", "Viudo", "Casado", "Casado", "Divorciado",
+ "Union libre", "Soltero", "Divorciado", "Divorciado", "Casado", "Union libre", "Soltero",
+ "Viudo", "Viudo", "Soltero", "Divorciado", "Viudo", "Viudo", "Soltero", "Union libre", "Divorciado")
+               
+```
+
+```{r}
+summary(Estado_Civil)
+
+```
+
+```{r}
+Estado_ord <- sort(Estado_Civil); (Estado_ord)
+
+```
+
+```{r}
+table(Estado_Civil)                # Frecuencias
+prop.table(table(Estado_Civil))    # Proporciones
+```
+
+```{r}
+freq <- table(Estado_Civil)
+porc <- round(prop.table(freq)*100, 1)
+mi_min <- names(freq)[which.min(freq)] 
+(mi_min)
+mi_max <- names(freq)[which.max(freq)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq), 0.8)
+
+bp <- barplot(freq,
+              col = bar_colors,
+              main = "Estado Civil",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq)+2),
+              cex.names = 0.8)
+
+# Agregar valores encima de cada barra
+text(bp, freq, labels = freq, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq,
+    labels = paste(names(freq), porc, "%"),
+    col = rainbow(length(freq), 0.8),
+    main = "Estado Civil")
+```

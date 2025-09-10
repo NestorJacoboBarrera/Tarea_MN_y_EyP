@@ -1,0 +1,181 @@
+---
+title: "Temperatura en grados Celsius"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Temperatura_celsius <- c( 20.1, 23.1, 30.6, 32.3, 31.7, 5, 21.1, 27.4, 21.3, 29,
+ 19.8, 15.3, 28.7, 25.1, 14.3, 23.3, 28.7, 17.7, 30.3, 26.7, 26.2, 11.4, 25.5, 15, 23.8,
+ 23.9, 16.2, 26, 12.7, 32.8, 19.2, 37.2, 10.3, 25, 14.9, 30.9, 19, 23.64, 24.1, 13.1,
+ 17.6, 31.9, 25.7, 13.6, 21.6, 14.4, 29.5, 7.75, 33.7, 35.2)
+```
+
+```{r}
+summary(Temperatura_celsius)
+```
+
+```{r}
+Temp_ord <- sort(Temperatura_celsius); (Temp_ord)
+cte <- 9
+```
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+```{r}
+mis_deciles <- Temp_ord[t]; (mis_deciles)
+cuantiles <- quantile(Temperatura_celsius); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+```{r}
+x_media <- mean(Temperatura_celsius);(x_media)
+mi_min <- min(Temperatura_celsius); (mi_min)
+mi_max <- max(Temperatura_celsius); (mi_max)
+varianza <- var(Temperatura_celsius); (varianza) 
+DesvEst <- sd(Temperatura_celsius); (DesvEst)
+```
+
+```{r}
+plot(
+  Temperatura_celsius,
+  main = "Temperatura en Grados Celcius",
+  xlab = "Temperatura ",
+  ylab = "Grados (Celcius)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                 
+  legend = c(mi_min,mi_max),    
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                
+  cex = 0.7,
+  bty = "n"                    
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(Temperatura_celsius), min(Temperatura_celsius), col = "purple", pch = 17, cex = 1.5)
+points(which.max(Temperatura_celsius), max(Temperatura_celsius), col = "orange", pch = 17, cex = 1.5)
+```
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(Temperatura_celsius, breaks = nbreaks, col= miscolores, 
+          main = 'Temperatura',
+          xlab="Grados Celsius ",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+```{r}
+nbreaks=10;
+h2 <- hist(Temperatura_celsius, breaks = nbreaks, col= miscolores, 
+           main = 'Temperatura',
+           xlab="Grados Celcius",
+           ylab="Frecuencias",
+           ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                
+  legend = h$counts,    
+  fill = miscolores,
+  col = miscolores,    
+  pt.cex = 1.5,               
+  cex = 0.5,
+  bty = "n"                    
+)
+```
+
+```{r}
+h3 <- hist(Temperatura_celsius, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Temperatura en Grados Celcius',
+           xlab="Grados Celcius",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                   
+)
+```
+
+```{r}
+nbreaks <- 10
+intervalos <- cut(Temperatura_celsius, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Temperatura ",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(Temperatura_celsius, breaks = nbreaks, plot = FALSE)
+hist(Temperatura_celsius,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Grados Celcius",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           
+```

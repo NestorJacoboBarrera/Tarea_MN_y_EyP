@@ -1,0 +1,181 @@
+---
+title: "Goles en un partido"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Goles_partido <- c( 0, 1, 1, 0, 0, 1, 2, 0, 4, 0, 0, 0, 3, 0, 2, 3, 1, 1, 0, 1, 3, 0, 0,
+ 4, 0, 1, 0, 4, 3, 3, 1, 2, 0, 0, 4, 4, 1, 2, 0, 0, 1, 0, 0, 4, 1, 3, 1, 0, 1, 0, 0, 3, 0, 0,
+ 0, 0, 0, 0, 3, 4, 3, 1, 1, 0, 0, 3, 0, 1, 1, 0, 1, 0, 1, 1, 0, 3, 0, 1, 3, 0, 0, 3, 1, 3, 1,
+ 3, 0, 1, 2, 0, 1, 1, 3, 0, 1, 0, 0, 1, 1, 2 )
+```
+
+```{r}
+summary(Goles_partido)
+```
+
+```{r}
+Goles_ord <- sort(Goles_partido); (Goles_ord)
+cte <- 9
+```
+
+```{r}
+indices <- 1:1; (indices)
+t <- cte*indices; (t)
+```
+
+```{r}
+mis_deciles <- Goles_ord[t]; (mis_deciles)
+cuantiles <- quantile(Goles_partido); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+```{r}
+x_media <- mean(Goles_partido);(x_media)
+mi_min <- min(Goles_partido); (mi_min)
+mi_max <- max(Goles_partido); (mi_max)
+varianza <- var(Goles_partido); (varianza) 
+DesvEst <- sd(Goles_partido); (DesvEst)
+```
+
+```{r}
+plot(
+  Goles_partido,
+  main = "Gráfica Goles por Partido",
+  xlab = "Índice de Goles",
+  ylab = "Numero (goles)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                 
+  legend = c(mi_min,mi_max),    
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                
+  cex = 0.7,
+  bty = "n"                    
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(Goles_partido), min(Goles_partido), col = "purple", pch = 17, cex = 1.5)
+points(which.max(Goles_partido), max(Goles_partido), col = "orange", pch = 17, cex = 1.5)
+```
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(Goles_partido, breaks = nbreaks, col= miscolores, 
+          main = 'Numero de Goles por Partido',
+          xlab="Goles",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+```{r}
+nbreaks=10;
+h2 <- hist(Goles_partido, breaks = nbreaks, col= miscolores, 
+           main = 'Numero de Goles por Partido',
+           xlab="Goles",
+           ylab="Frecuencias",
+           ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                
+  legend = h$counts,    
+  fill = miscolores,
+  col = miscolores,    
+  pt.cex = 1.5,               
+  cex = 0.5,
+  bty = "n"                    
+)
+```
+
+```{r}
+h3 <- hist(Goles_partido, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = ' Goles por partido',
+           xlab="Numero Goles",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                   
+)
+```
+
+```{r}
+nbreaks <- 10
+intervalos <- cut(Goles_partido, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Goles Por Partido ",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(Goles_partido, breaks = nbreaks, plot = FALSE)
+hist(Goles_partido,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Numero (Goles)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           
+```

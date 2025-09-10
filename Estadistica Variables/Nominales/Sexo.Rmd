@@ -1,0 +1,70 @@
+---
+title: "Sexo"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Sexo <- c("NA","NA","NA","Femenino","NA","Femenino","Femenino","Femenino","NA","Masculino",
+"Femenino","Femenino","Masculino","Femenino","NA","Masculino","NA","NA","Masculino","Masculino",
+"Masculino", "Masculino","NA","Femenino","NA")
+               
+```
+
+```{r}
+summary(Sexo)
+
+```
+
+```{r}
+sexo_ord <- sort(Sexo); (sexo_ord)
+```
+
+```{r}
+table(Sexo)                # Frecuencias
+prop.table(table(Sexo))    # Proporciones
+```
+
+```{r}
+freq <- table(Sexo)
+porc <- round(prop.table(freq)*100, 1)
+mi_min <- names(freq)[which.min(freq)] 
+(mi_min)
+mi_max <- names(freq)[which.max(freq)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq), 0.8)
+
+bp <- barplot(freq,
+              col = bar_colors,
+              main = "Sexo",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq)+2),
+              cex.names = 0.7)
+
+# Agregar valores encima de cada barra
+text(bp, freq, labels = freq, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq,
+    labels = paste(names(freq), porc, "%"),
+    col = rainbow(length(freq), 0.8),
+    main = "Sexo")
+```

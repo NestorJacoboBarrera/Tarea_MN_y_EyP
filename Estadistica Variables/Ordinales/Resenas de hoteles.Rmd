@@ -1,0 +1,77 @@
+---
+title: "Resenas de hoteles"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Resena_Hoteles <- factor(c( "4 estrellas", "5 estrellas", "1.5 estrellas", "4.5 estrellas", "5 estrellas",
+ "4.5 estrellas", "2.5 estrellas", "4 estrellas", "4.5 estrellas", "1.5 estrellas", "3.5 estrellas", "1 estrella",
+ "3.5 estrellas", "3 estrellas", "5 estrellas", "1.5 estrellas", "2 estrellas", "2 estrellas",
+ "1.5 estrellas", "4.5 estrellas", "4.5 estrellas", "1.5 estrellas", "3.5 estrellas", "4 estrellas", "1 estrella",
+ "4 estrellas", "4.5 estrellas", "3.5 estrellas", "1 estrella", "4 estrellas", "4 estrellas", 
+ "2 estrellas", "1 estrella", "4.5 estrellas", "1 estrella"),
+                levels=c("1 estrella","1.5 estrellas","2 estrellas","2.5 estrellas",
+                         "3 estrellas","3.5 estrellas","4 estrellas", "4.5 estrellas",
+                         "5 estrellas"),
+                ordered=TRUE)
+```
+
+```{r}
+Resena_num <- as.numeric(Resena_Hoteles)
+```
+
+```{r}
+median(Resena_num)                      
+levels(Resena_Hoteles)[median(Resena_num)]
+```
+
+```{r}
+quantile(Resena_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(Resena_Hoteles)[quantile(Resena_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(Resena_Hoteles)
+
+freq_resena <- table(Resena_Hoteles)
+porc_resena <- round(prop.table(freq_resena)*100, 1)
+```
+
+
+```{r}
+mi_min <- names(freq_resena)[which.min(freq_resena)] 
+(mi_min)
+mi_max <- names(freq_resena)[which.max(freq_resena)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq_resena), 0.8)
+
+bp <- barplot(freq_resena,
+              col = bar_colors,
+              main = "Reseñas de Hoteles",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq_resena)+2),
+              cex.names = 0.6)
+
+# Agregar valores encima de cada barra
+text(bp, freq_resena, labels = freq_resena, pos = 3, cex = 0.8)
+
+```
+
+```{r}
+pie(freq_resena,
+    labels = paste(names(freq_resena), porc_resena, "%"),
+    col = rainbow(length(freq_resena), 0.8),
+    main = "Reseñas de Hoteles")
+```

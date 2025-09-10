@@ -1,0 +1,183 @@
+---
+title: "Tiempos de traslado en horas"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Tiempo_traslado <- c( 1.5, 1.3, 1.1, 0.6, 0.9, 1.4, 0.8, 1.7, 1.7, 1.6, 1.7, 1.3,
+ 1.5, 0.5, 1.4, 0.6, 1.5, 1.9, 0.7, 1.9, 2, 1.6, 0.7, 1.6, 0.7, 0.5, 0.6, 1.6, 1.4, 1.9, 1.9,
+ 1, 1.7, 1.7, 1.8, 1.6, 1.4, 1.4, 0.7, 0.8, 1.5, 0.8, 1.9, 1.2, 1.9, 1.8, 1.7, 1.5, 1.5, 0.7,
+ 1.8, 1.3, 1.8, 0.6, 1.5, 1.4, 1.3, 1.3, 0.8, 1.4, 0.6, 1.1, 1.1, 0.6, 1.7, 0.5, 2, 1.7, 0.7,
+ 1, 0.6, 1.8, 1.1, 1.6, 1, 1.1, 1.8, 0.8, 1.1, 1.7, 1.4, 1.4, 1.2, 1.5, 1.6, 1.6, 1.5, 0.5,
+ 1.4, 1.1, 1, 0.9, 0.6, 1.7, 1.6, 1.2, 0.6, 1.2, 1.2, 1.8)
+```
+
+```{r}
+summary(Tiempo_traslado)
+```
+
+```{r}
+Tiempo_ord <- sort(Tiempo_traslado); (Tiempo_ord)
+cte <- 9
+```
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+```{r}
+mis_deciles <- Tiempo_ord[t]; (mis_deciles)
+cuantiles <- quantile(Tiempo_traslado); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+```{r}
+x_media <- mean(Tiempo_traslado);(x_media)
+mi_min <- min(Tiempo_traslado); (mi_min)
+mi_max <- max(Tiempo_traslado); (mi_max)
+varianza <- var(Tiempo_traslado); (varianza) 
+DesvEst <- sd(Tiempo_traslado); (DesvEst)
+```
+
+```{r}
+plot(
+  Tiempo_traslado,
+  main = "Gráfica Tiempo de Traslado",
+  xlab = "Índice de Tiempo",
+  ylab = "Numero (Horas)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                 
+  legend = c(mi_min,mi_max),    
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                
+  cex = 0.7,
+  bty = "n"                    
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(Tiempo_traslado), min(Tiempo_traslado), col = "purple", pch = 17, cex = 1.5)
+points(which.max(Tiempo_traslado), max(Tiempo_traslado), col = "orange", pch = 17, cex = 1.5)
+```
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(Tiempo_traslado, breaks = nbreaks, col= miscolores, 
+          main = 'Traslados',
+          xlab="Tiempo",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+```{r}
+nbreaks=10;
+h2 <- hist(Tiempo_traslado, breaks = nbreaks, col= miscolores, 
+           main = 'Traslados',
+           xlab="Tiempo",
+           ylab="Frecuencias",
+           ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                
+  legend = h$counts,    
+  fill = miscolores,
+  col = miscolores,    
+  pt.cex = 1.5,               
+  cex = 0.5,
+  bty = "n"                    
+)
+```
+
+```{r}
+h3 <- hist(Tiempo_traslado, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Tiempo de Traslado',
+           xlab="Tiempo",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                   
+)
+```
+
+```{r}
+nbreaks <- 10
+intervalos <- cut(Tiempo_traslado, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Tiempo de Traslados",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(Tiempo_traslado, breaks = nbreaks, plot = FALSE)
+hist(Tiempo_traslado,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Numero (traslados)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           
+```

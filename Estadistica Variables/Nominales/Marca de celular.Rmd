@@ -1,0 +1,75 @@
+---
+title: "Marca de celular"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Marca_celular <- c("Apple", "Samsung", "LG", "Huawei", "OnePlus", "Sony", "Apple", "Samsung",
+ "Huawei", "Huawei", "Nokia", "OnePlus", "Motorola", "Xiaomi", "Samsung", "Apple", "Apple", "Motorola",
+ "Samsung", "Samsung", "Huawei", "Motorola", "Nokia", "OnePlus", "Huawei", "Huawei",
+ "Apple", "LG", "Apple", "Xiaomi", "LG", "OnePlus", "OnePlus", "LG", "Sony", "Samsung", "Apple",
+ "Xiaomi", "Oppo", "Motorola", "LG", "Samsung", "Motorola", "Samsung", "Nokia", "OnePlus", "OnePlus",
+ "Oppo", "Sony", "Nokia", "Huawei", "LG", "Sony", "Xiaomi", "LG", "Huawei", "LG", "Nokia",
+ "Xiaomi", "Sony", "OnePlus", "LG", "Xiaomi", "OnePlus", "Oppo", "Nokia", "Huawei", "Xiaomi", "Oppo", "Oppo")
+               
+```
+
+```{r}
+summary(Marca_celular)
+
+```
+
+```{r}
+Marca_ord <- sort(Marca_celular); (Marca_ord)
+```
+
+```{r}
+table(Marca_celular)                # Frecuencias
+prop.table(table(Marca_celular))    # Proporciones
+```
+
+```{r}
+freq <- table(Marca_celular)
+porc <- round(prop.table(freq)*100, 1)
+mi_min <- names(freq)[which.min(freq)] 
+(mi_min)
+mi_max <- names(freq)[which.max(freq)] 
+(mi_max)
+
+```
+
+```{r}
+bar_colors <- rainbow(length(freq), 0.8)
+
+bp <- barplot(freq,
+              col = bar_colors,
+              main = "Marcas de Celulares",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq)+2),
+              cex.names = 0.7)
+
+# Agregar valores encima de cada barra
+text(bp, freq, labels = freq, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq,
+    labels = paste(names(freq), porc, "%"),
+    col = rainbow(length(freq), 0.8),
+    main = "Marcas de Celulares")
+```

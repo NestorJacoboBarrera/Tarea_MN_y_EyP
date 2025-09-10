@@ -1,0 +1,76 @@
+---
+title: "Examen"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Examen <- c("Reprobado", "Aprobado", "Aprobado", "Aprobado", "Aprobado", "Reprobado", "Aprobado", 
+"Reprobado", "Reprobado", "Aprobado", "Reprobado", "Reprobado", "Reprobado", "Reprobado",
+"Aprobado", "Reprobado", "Reprobado", "Aprobado", "Aprobado", "Reprobado", "Aprobado",
+"Aprobado", "Aprobado", "Aprobado", "Reprobado", "Aprobado", "Reprobado", "Aprobado", "Reprobado",
+"Reprobado", "Aprobado", "Reprobado", "Aprobado", "Reprobado", "Aprobado", "Reprobado",
+"Reprobado", "Aprobado", "Reprobado", "Reprobado", "Reprobado", "Aprobado", "Aprobado",
+ "Aprobado", "Aprobado", "Reprobado", "Reprobado", "Reprobado", "Aprobado", "Reprobado")
+               
+```
+
+```{r}
+summary(Examen)
+```
+
+```{r}
+Examen_ord <- sort(Examen); (Examen_ord)
+```
+
+```{r}
+table(Examen)                # Frecuencias
+prop.table(table(Examen))    # Proporciones
+```
+
+```{r}
+
+freq <- table(Examen)
+porc <- round(prop.table(freq)*100, 1)
+mi_min <- names(freq)[which.min(freq)] 
+(mi_min)
+mi_max <- names(freq)[which.max(freq)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- c("skyblue", "tomato")
+
+# Gráfico
+bp <- barplot(freq,
+              col = bar_colors,
+              main = "Examen",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, 50),   # << ahora llega hasta 50
+              cex.names = 0.9,
+              space = 0.5
+)
+
+# Agregar valores encima de cada barra
+text(bp, freq, labels = freq, pos = 3, cex = 1, font = 2)
+text(bp, freq, labels = freq, pos = 3, cex = 0.9, font = 2)
+      
+```
+
+```{r}
+pie(freq,
+    labels = paste(names(freq), porc, "%"),
+    col = rainbow(length(freq), 0.8),
+    main = "Examen")
+```
