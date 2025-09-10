@@ -1,0 +1,146 @@
+---
+title: "Clase de Proba"
+autor: Nestor Ivan Jacobo Barrera
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+    word_document: default 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+rm(list = ls())
+```
+
+```{r}
+u <- runif(10,0,1); head(u,20)
+plot(u, col="blue")
+```
+
+```{r}
+u <- runif(100,0,1); head(u,20)
+plot(u, col="blue")
+```
+
+```{r}
+u <- runif(1000,0,1); head(u,20)
+plot(u, col="blue")
+```
+
+```{r}
+u <- runif(15000,0,1); head(u,20)
+plot(u, col="lightblue")
+```
+
+```{r}
+u <- runif(20000,0,1); head(u,20)
+plot(u, col="purple")
+```
+
+```{r}
+u <- runif(25000,0,1); head(u,20)
+plot(u, col="lightgreen")
+```
+
+```{r}
+u <- runif(50000,0,1); head(u,20)
+plot(u, col="lightgreen")
+```
+## extraccion de muestras
+```{r}
+Muestra1 <- sample(u,100,replace=FALSE)
+plot(Muestra1,
+     main= "Muestra de Tamaño 100",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="purple")
+```
+
+```{r}
+hist(u,col=rainbow(10,0.23))
+```
+
+```{r}
+hist(Muestra1,col="purple",
+     main="Muestra tamaño 100",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)"
+     )
+```
+
+```{r}
+muestra2 <- sample(u,250,replace = FALSE)
+  plot(muestra2,
+     main= "Muestra de Tamaño 250",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="purple")
+```
+
+```{r}
+hist(u,col=rainbow(10,0.23))
+```
+
+```{r}
+hist(muestra2,col="purple",
+     main="Muestra tamaño 250",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)"
+     )
+```
+
+```{r}
+u <- rnorm(10,0,1); head(u,20)
+plot(u,col="blue")
+```
+
+```{r}
+u <- rnorm(100,0,1); head(u,20)
+plot(u,col="blue")
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```

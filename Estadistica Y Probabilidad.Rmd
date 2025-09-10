@@ -1,0 +1,128 @@
+---
+title: "Estadistica Y Probabilidad"
+output: html_document
+date: "2025-09-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Ejemplos del uso del comando "for"
+```{r}
+n_try <- 10;
+lista <- c()
+for(i in 1:n_try){
+   lista[i] <- i^2 ;
+   print(lista[i])
+}   
+(lista)
+```
+
+se van a generar los primeros 10 cuadrados, cubos, cuarta y quinta potencia de los primeros 10 numeros naturales
+```{r}
+n_try <-10;
+potencias <- 5
+matriz_potencias <- matrix(0, n_try, potencias);
+(matriz_potencias)
+```
+
+```{r}
+for (i in 1:n_try){
+  for (j in 1:potencias){
+    matriz_potencias[i, j] <- i^j
+    print(matriz_potencias[i, j])
+    
+  }
+  
+}
+print(matriz_potencias)
+```
+```{r}
+colnames(matriz_potencias)<- c("N", "Cuadrado", "Cubo","Cuarta", "Quinta")
+(matriz_potencias)
+```
+Nombres a los renglones
+```{r}
+rownames(matriz_potencias) <- c("N=1","N=2","N=3","N=4","N=5","N=6","N=7","N=8","N=9","N=10")
+(matriz_potencias)
+```
+
+```{r}
+M_potencias <- as.data.frame(matriz_potencias);
+print(M_potencias)
+```
+
+```{r}
+medias <- c()
+medias[1] <- mean(matriz_potencias[1,])
+medias[2] <- mean(matriz_potencias[2,])
+medias[3] <- mean(matriz_potencias[3,])
+medias[4] <- mean(matriz_potencias[4,])
+medias[5] <- mean(matriz_potencias[5,])
+medias[6] <- mean(matriz_potencias[6,])
+medias[7] <- mean(matriz_potencias[7,])
+medias[8] <- mean(matriz_potencias[8,])
+medias[9] <- mean(matriz_potencias[9,])
+medias[10] <- mean(matriz_potencias[10,])
+(medias)
+
+```
+
+```{r}
+medias_col<- c()
+medias_col[1] <- mean(matriz_potencias [,1])
+medias_col[2] <- mean(matriz_potencias [,2])
+medias_col[3] <- mean(matriz_potencias [,3])
+medias_col[4] <- mean(matriz_potencias [,4])
+medias_col[5] <- mean(matriz_potencias [,5])
+(medias_col)
+```
+
+```{r}
+vector_medias_columna <- c()
+for (i in 1:potencias) {
+  vector_medias_columna[i] <- mean(matriz_potencias[,i])
+  print(vector_medias_columna[i])
+}
+print(vector_medias_columna)
+```
+ahora por renglon
+```{r}
+vector_medias_renglon <- c()
+for (i in 1:n_try) {
+  vector_medias_renglon[i] <- mean(matriz_potencias[i,])
+  print(vector_medias_renglon[i])
+}
+print(vector_medias_renglon)
+```
+
+```{r}
+vector_dsvcolumnas <- c()
+ for (i in 1:potencias) {
+ vector_dsvcolumnas[i]<- sd(matriz_potencias[,i])  
+ } 
+    
+print(vector_dsvcolumnas)
+
+
+
+
+```
+
+```{r}
+vector_dsvrenglon <- c()
+for (i in 1:matriz_potencias)
+  {
+  vector_dsvrenglon[i] <- sd(matriz_potencias[i,])
+  
+}
+print(vector_dsvrenglon[i])
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
