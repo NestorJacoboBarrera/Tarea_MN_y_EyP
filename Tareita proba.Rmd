@@ -1,0 +1,209 @@
+---
+title: "Tareita proba 1"
+autor: Nestor Ivan Jacobo Barrera
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+    word_document: default 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+rm(list = ls())
+```
+
+```{r}
+u <- runif(10,0,1); head(u,20)
+plot(u, col="blue")
+
+Muestra1 <- sample(u,7,replace=FALSE)
+plot(Muestra1,
+     main= "Muestra de Tamaño 70 (de 100)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkblue")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra1,col="blue",
+     main="Muestra tamaño 70",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+
+
+```
+
+```{r}
+u <- runif(100,0,1); head(u,20)
+plot(u, col="blue")
+
+Muestra1 <- sample(u,70,replace=FALSE)
+plot(Muestra1,
+     main= "Muestra de Tamaño 70 (de 100)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkblue")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra1,col="blue",
+     main="Muestra tamaño 70",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+
+
+```
+
+```{r}
+u <- runif(1000,0,1); head(u,20)
+plot(u, col="green")
+
+Muestra2 <- sample(u,800,replace=FALSE)
+plot(Muestra2,
+     main= "Muestra de Tamaño 800 (de 1000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkgreen")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra2,col="green",
+     main="Muestra tamaño 800",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(10000,0,1); head(u,20)
+plot(u, col="orange")
+
+Muestra3 <- sample(u,5000,replace=FALSE)
+plot(Muestra3,
+     main= "Muestra de Tamaño 5000 (de 10000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkorange")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra3,col="orange",
+     main="Muestra tamaño 5000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(20000,0,1); head(u,20)
+plot(u, col="purple")
+
+Muestra4 <- sample(u,15000,replace=FALSE)
+plot(Muestra4,
+     main= "Muestra de Tamaño 15000 (de 20000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkviolet")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra4,col="purple",
+     main="Muestra tamaño 15000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(25000,0,1); head(u,20)
+plot(u, col="brown")
+
+Muestra5 <- sample(u,20000,replace=FALSE)
+plot(Muestra5,
+     main= "Muestra de Tamaño 20000 (de 25000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="saddlebrown")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra5,col="brown",
+     main="Muestra tamaño 20000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(50000,0,1); head(u,20)
+plot(u, col="black")
+
+Muestra6 <- sample(u,40000,replace=FALSE)
+plot(Muestra6,
+     main= "Muestra de Tamaño 40000 (de 50000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="gray20")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra6,col="black",
+     main="Muestra tamaño 40000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(100000,0,1); head(u,20)
+plot(u, col="red")
+
+Muestra7 <- sample(u,70000,replace=FALSE)
+plot(Muestra7,
+     main= "Muestra de Tamaño 70000 (de 100,000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkred")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra7,col="red",
+     main="Muestra tamaño 70000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+## extraccion de muestras
+```{r}
+u <- runif(500000,0,1); head(u,20)
+plot(u, col="green")
+
+Muestra8 <- sample(u,300000,replace=FALSE)
+plot(Muestra8,
+     main= "Muestra de Tamaño 300,000 (de 500,000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkgreen")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra8,col="green",
+     main="Muestra tamaño 300,000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+```{r}
+u <- runif(1000000,0,1); head(u,20)
+plot(u, col="blue")
+
+Muestra9 <- sample(u,500000,replace=FALSE)
+plot(Muestra9,
+     main= "Muestra de Tamaño 500,000 (de 1,000,000)",
+     xlab="Elementos de la muestra",
+     ylab="Uniformes(0,1)",
+     col="darkblue")
+
+hist(u,col=rainbow(10,0.23))
+hist(Muestra9,col="blue",
+     main="Muestra tamaño 500,000",
+     xlab="elementos de la muestra",
+     ylab="uniformes(0,1)")
+```
+
+

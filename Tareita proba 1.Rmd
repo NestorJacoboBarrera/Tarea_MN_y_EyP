@@ -1,0 +1,154 @@
+---
+title: "Tareita proba 1"
+autor: Nestor Ivan Jacobo Barrera
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+    word_document: default 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+rm(list = ls())
+```
+
+```{r}
+u <- rnorm(10,0,1); head(u,20)
+plot(u, col="darkred")
+
+Muestra <- sample(u,7,replace=FALSE)
+plot(Muestra, col="red",
+     main="Muestra 7 de 10",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkred")
+hist(Muestra,col="red")
+```
+
+```{r}
+u <- rnorm(100,0,1); head(u,20)
+plot(u, col="darkblue")
+
+Muestra <- sample(u,70,replace=FALSE)
+plot(Muestra, col="blue",
+     main="Muestra 70 de 100",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkblue")
+hist(Muestra,col="blue")
+```
+
+```{r}
+u <- rnorm(1000,0,1); head(u,20)
+plot(u, col="darkgreen")
+
+Muestra <- sample(u,800,replace=FALSE)
+plot(Muestra, col="green",
+     main="Muestra 800 de 1000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkgreen")
+hist(Muestra,col="green")
+```
+
+```{r}
+u <- rnorm(10000,0,1); head(u,20)
+plot(u, col="darkorange")
+
+Muestra <- sample(u,5000,replace=FALSE)
+plot(Muestra, col="orange",
+     main="Muestra 5000 de 10000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkorange")
+hist(Muestra,col="orange")
+```
+
+```{r}
+u <- rnorm(20000,0,1); head(u,20)
+plot(u, col="darkviolet")
+
+Muestra <- sample(u,15000,replace=FALSE)
+plot(Muestra, col="purple",
+     main="Muestra 15000 de 20000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkviolet")
+hist(Muestra,col="purple")
+```
+
+```{r}
+u <- rnorm(25000,0,1); head(u,20)
+plot(u, col="saddlebrown")
+
+Muestra <- sample(u,24600,replace=FALSE)
+plot(Muestra, col="brown",
+     main="Muestra 24600 de 25000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="saddlebrown")
+hist(Muestra,col="brown")
+```
+
+```{r}
+u <- rnorm(50000,0,1); head(u,20)
+plot(u, col="gray20")
+
+Muestra <- sample(u,45000,replace=FALSE)
+plot(Muestra, col="black",
+     main="Muestra 45000 de 50000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="gray20")
+hist(Muestra,col="black")
+```
+## extraccion de muestras
+```{r}
+u <- rnorm(100000,0,1); head(u,20)
+plot(u, col="darkcyan")
+
+Muestra <- sample(u,77000,replace=FALSE)
+plot(Muestra, col="cyan",
+     main="Muestra 77000 de 1,000,000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkcyan")
+hist(Muestra,col="cyan")
+```
+
+```{r}
+u <- rnorm(500000,0,1); head(u,20)
+plot(u, col="darkmagenta")
+
+Muestra <- sample(u,400000,replace=FALSE)
+plot(Muestra, col="magenta",
+     main="Muestra 400,000 de 500,000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="darkmagenta")
+hist(Muestra,col="magenta")
+```
+
+```{r}
+u <- rnorm(1000000,0,1); head(u,20)
+plot(u, col="gold4")
+
+Muestra <- sample(u,500000,replace=FALSE)
+plot(Muestra, col="gold",
+     main="Muestra 500,000 de 1000,000",
+     xlab="Elemento", ylab="Normal(0,1)")
+
+hist(u,col="gold4")
+hist(Muestra,col="gold")
+```
+
