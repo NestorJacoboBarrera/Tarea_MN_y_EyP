@@ -1,0 +1,82 @@
+---
+title: "Nivel de satisfaccion:"
+author: "Nestor Ivan Jacobo Barrera"
+date: "2025-09-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+
+```
+
+```{r}
+Nivel_satisfaccion <- factor(c("satisfecho", "muy satisfecho", "muy insatisfecho", "neutral", "muy satisfecho",
+"muy insatisfecho", "muy satisfecho", "insatisfecho", "muy insatisfecho", "insatisfecho", "muy satisfecho",
+"insatisfecho", "muy satisfecho", "muy satisfecho", "mas o menos insatisfecho", "insatisfecho",
+"satisfecho", "muy satisfecho", "neutral", "mas o menos insatisfecho", "muy insatisfecho",
+"mas o menos satisfecho", "insatisfecho", "neutral", "mas o menos satisfecho", "satisfecho",
+"mas o menos satisfecho", "satisfecho", "neutral", "satisfecho", "muy insatisfecho",
+"muy insatisfecho", "neutral", "satisfecho", "insatisfecho", "mas o menos satisfecho",
+"mas o menos insatisfecho", "muy insatisfecho", "neutral", "neutral", "satisfecho", "neutral",
+"insatisfecho", "mas o menos insatisfecho", "mas o menos insatisfecho", "insatisfecho",
+"mas o menos satisfecho", "satisfecho", "neutral", "insatisfecho", "insatisfecho", "muy insatisfecho",
+"muy satisfecho", "mas o menos satisfecho", "mas o menos satisfecho"),
+                levels=c("muy insatisfecho","insatisfecho","mas o menos insatisfecho", "neutral", "mas o menos satisfecho", "satisfecho", "muy satisfecho"),
+                ordered=TRUE)
+```
+
+```{r}
+nivel_num <- as.numeric(Nivel_satisfaccion)
+```
+
+```{r}
+median(nivel_num)                      
+levels(Nivel_satisfaccion)[median(nivel_num)]
+```
+
+```{r}
+quantile(nivel_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(Nivel_satisfaccion)[quantile(nivel_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(Nivel_satisfaccion)
+
+freq_nivel <- table(Nivel_satisfaccion)
+porc_nivel <- round(prop.table(freq_nivel)*100, 1)
+```
+
+
+```{r}
+mi_min <- names(freq_nivel)[which.min(freq_nivel)] 
+(mi_min)
+mi_max <- names(freq_nivel)[which.max(freq_nivel)] 
+(mi_max)
+```
+
+```{r}
+bar_colors <- rainbow(length(freq_nivel), 0.8)
+
+bp <- barplot(freq_nivel,
+              col = bar_colors,
+              main = "Nivel satisfaccion",
+              xlab = "",
+              ylab = "Frecuencia",
+              ylim = c(0, max(freq_nivel)+2),
+              cex.names = 0.7)
+
+# Agregar valores encima de cada barra
+text(bp, freq_nivel, labels = freq_nivel, pos = 3, cex = 0.8)
+
+
+      
+```
+
+```{r}
+pie(freq_nivel,
+    labels = paste(names(freq_nivel), porc_nivel, "%"),
+    col = rainbow(length(freq_nivel), 0.8),
+    main = "Nivel_satisfaccion")
+```
